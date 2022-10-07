@@ -76,6 +76,10 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     </message>
     <message>
+        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
+        <translation>To so vaši naslovi za prejemanje Bitcoinov. Če želite ustvariti nov naslov za prejemanje, uporabite gumb za ustvarjanje novih naslovov v zavihku "prejemanje".</translation>
+    </message>
+    <message>
         <source>&amp;Copy Address</source>
         <translation>&amp;Kopiraj naslov</translation>
     </message>
@@ -845,10 +849,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
         <translation>Ustvari denarnico</translation>
     </message>
     <message>
-        <source>Wallet</source>
-        <translation>Denarnica</translation>
-    </message>
-    <message>
         <source>Wallet Name</source>
         <translation>Ime denarnice</translation>
     </message>
@@ -859,10 +859,6 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     <message>
         <source>Encrypt Wallet</source>
         <translation>Šifriraj denarnico</translation>
-    </message>
-    <message>
-        <source>Advanced Options</source>
-        <translation>Napredne možnosti</translation>
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
@@ -1011,6 +1007,10 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     <message>
         <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
         <translation>Če spremenite to nastavitev, morate ponovno naložiti celotno verigo blokov. Hitreje je najprej prenesti celotno verigo in jo obrezati pozneje. Ta nastavitev onemogoči nekatere napredne funkcije.</translation>
+    </message>
+    <message>
+        <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
+        <translation>Če spremenite to nastavitev, morate ponovno naložiti celotno verigo blokov. Hitreje je najprej prenesti celotno verigo in jo obrezati pozneje. Onemogoči nekatere napredne funkcije.</translation>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
@@ -1668,6 +1668,14 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     <message>
         <source>If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
         <translation>Če ste prejeli to napako, zaprosite prejemnika za URI, ki je združljiv z BIP21.</translation>
+    </message>
+    <message>
+        <source>Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.</source>
+        <translation>Zaradi varnostnih napak v BIP70 priporočamo, da se kakršna koli navodila trgovca za zamenjavo denarnic ne upoštevajo.</translation>
+    </message>
+    <message>
+        <source>If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
+        <translation>Če ste prejeli to napako, zaprosite za URI, ki je združljiv z BIP21.</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
@@ -3584,10 +3592,6 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
         <translation>Napaka pri branju %s! Vsi ključi so bili prebrani pravilno, vendar so lahko vnosi o transakcijah ali vnosi naslovov nepravilni ali manjkajo.</translation>
     </message>
     <message>
-        <source>More than one onion bind address is provided. Using %s for the automatically created Tor onion service.</source>
-        <translation>Nastavljen je več kot en onion-naslov. Za samodejno ustvarjeno storitev na Toru uporabljam %s.</translation>
-    </message>
-    <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
         <translation>Opozorilo: Preverite, če sta datum in ura na vašem računalniku točna! %s ne bo deloval pravilno, če je nastavljeni čas nepravilen.</translation>
     </message>
@@ -3646,6 +3650,10 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
     <message>
         <source>Change index out of range</source>
         <translation>Indeks vračila izven dovoljenega območja</translation>
+    </message>
+    <message>
+        <source>Config setting for %s only applied on %s network when in [%s] section.</source>
+        <translation>Konfiguracijske nastavitve za %s se upoštevajo le na omrežju %s v sekciji [%s].</translation>
     </message>
     <message>
         <source>Config setting for %s only applied on %s network when in [%s] section.</source>
@@ -3714,10 +3722,6 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
     <message>
         <source>Failed to verify database</source>
         <translation>Preverba podatkovne baze je spodletela.</translation>
-    </message>
-    <message>
-        <source>Ignoring duplicate -wallet %s.</source>
-        <translation>Podvojen -wallet %s -- ne upoštevam.</translation>
     </message>
     <message>
         <source>Importing...</source>
@@ -3872,10 +3876,6 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
         <translation>Ta napaka se lahko pojavi, če denarnica ni bila pravilno zaprta in je bila nazadnje naložena s programsko opremo z novejšo verzijo Berkely DB. Če je temu tako, prosimo uporabite programsko opremo, s katero je bila ta denarnica nazadnje naložena.</translation>
     </message>
     <message>
-        <source>This is the maximum transaction fee you pay (in addition to the normal fee) to prioritize partial spend avoidance over regular coin selection.</source>
-        <translation>To je najvišja transakcijska provizija, ki jo plačate (poleg običajne provizije) za prednostno izogibanje delni porabi pred rednim izbiranjem kovancev.</translation>
-    </message>
-    <message>
         <source>Transaction needs a change address, but we can't generate it. Please call keypoolrefill first.</source>
         <translation>Transakcija potrebuje naslov za vračilo, ki pa ga ni moč ustvariti. Prosimo, najprej pokličite keypoolrefill.</translation>
     </message>
@@ -4016,6 +4016,10 @@ Za odpiranje denarnice kliknite Datoteka &gt; Odpri denarnico
     <message>
         <source>This is the transaction fee you may pay when fee estimates are not available.</source>
         <translation>To je transakcijska provizija, ki jo lahko plačate, kadar ocene provizij niso na voljo.</translation>
+    </message>
+    <message>
+        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
+        <translation>Ta izdelek vključuje programsko opremo, ki jo je razvil OpenSSL Project za uporabo v orodju OpenSSL Toolkit %s in kriptografsko programsko opremo, ki jo je napisal Eric Young, in programsko opremo UPnP, ki jo je napisal Thomas Bernard.</translation>
     </message>
     <message>
         <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>

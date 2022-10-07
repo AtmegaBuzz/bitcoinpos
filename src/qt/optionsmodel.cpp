@@ -19,6 +19,12 @@
 #include <txdb.h> // for -dbcache defaults
 #include <util/string.h>
 
+#ifdef ENABLE_WALLET
+#include <wallet/wallet.h>
+#include <wallet/walletdb.h>
+#include <util/moneystr.h>
+#endif
+
 #include <QDebug>
 #include <QSettings>
 #include <QStringList>
@@ -69,7 +75,7 @@ void OptionsModel::Init(bool resetSettings)
 
     // Display
     if (!settings.contains("nDisplayUnit"))
-        settings.setValue("nDisplayUnit", BitcoinUnits::BTC);
+        settings.setValue("nDisplayUnit", BitcoinUnits::BTCS);
     nDisplayUnit = settings.value("nDisplayUnit").toInt();
 
     if (!settings.contains("strThirdPartyTxUrls"))
@@ -79,6 +85,8 @@ void OptionsModel::Init(bool resetSettings)
     if (!settings.contains("fCoinControlFeatures"))
         settings.setValue("fCoinControlFeatures", false);
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
+
+    fColdStakerControlFeatures = false;
 
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings.
@@ -313,6 +321,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return settings.value("language");
         case CoinControlFeatures:
             return fCoinControlFeatures;
+        case ColdStakerControlFeatures:
+            return fColdStakerControlFeatures;
         case Prune:
             return settings.value("bPrune");
         case PruneSize:

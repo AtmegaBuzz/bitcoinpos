@@ -82,10 +82,6 @@
     </context>
 <context>
     <name>CreateWalletDialog</name>
-    <message>
-        <source>Wallet</source>
-        <translation>Капчык</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>

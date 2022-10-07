@@ -462,10 +462,6 @@
         <translation>Jõuan järgi...</translation>
     </message>
     <message>
-        <source>Error: %1</source>
-        <translation>Tõrge %1</translation>
-    </message>
-    <message>
         <source>Date: %1
 </source>
         <translation>Kuupäev: %1
@@ -636,10 +632,6 @@
     </context>
 <context>
     <name>CreateWalletDialog</name>
-    <message>
-        <source>Wallet</source>
-        <translation>Rahakott</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -869,7 +861,7 @@
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Kuvatav info ei pruugi olla ajakohane. Ühenduse loomisel süngitakse sinu rahakott automaatselt Bitcoin võrgustikuga, kuid see toiming on hetkel lõpetamata.</translation>
+        <translation>Kuvatav info ei pruugi olla ajakohane. Ühenduse loomisel süngitakse sinu rahakott automaatselt Bitconi võrgustikuga, kuid see toiming on hetkel lõpetamata.</translation>
     </message>
     <message>
         <source>Pending:</source>
@@ -978,10 +970,6 @@
     <message>
         <source>%1 GB</source>
         <translation>%1 GB</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Tõrge %1</translation>
     </message>
     <message>
         <source>unknown</source>

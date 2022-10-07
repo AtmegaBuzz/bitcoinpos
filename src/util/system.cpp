@@ -71,7 +71,7 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const BITCOIN_CONF_FILENAME = "bitcoin.conf";
+const char * const BITCOIN_CONF_FILENAME = "bitcoin-pos.conf";
 const char * const BITCOIN_SETTINGS_FILENAME = "settings.json";
 
 ArgsManager gArgs;
@@ -336,16 +336,15 @@ bool ArgsManager::ParseParameters(int argc, const char* const argv[], std::strin
         m_settings.command_line_options[key].push_back(value);
     }
 
-    // we do not allow -includeconf from command line, only -noincludeconf
+    // we do not allow -includeconf from command line
+    bool success = true;
     if (auto* includes = util::FindKey(m_settings.command_line_options, "includeconf")) {
-        const util::SettingsSpan values{*includes};
-        // Range may be empty if -noincludeconf was passed
-        if (!values.empty()) {
-            error = "-includeconf cannot be used from commandline; -includeconf=" + values.begin()->write();
-            return false; // pick first value as example
+        for (const auto& include : util::SettingsSpan(*includes)) {
+            error += "-includeconf cannot be used from commandline; -includeconf=" + include.get_str() + "\n";
+            success = false;
         }
     }
-    return true;
+    return success;
 }
 
 Optional<unsigned int> ArgsManager::GetArgFlags(const std::string& name) const
@@ -651,12 +650,12 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 fs::path GetDefaultDataDir()
 {
-    // Windows: C:\Users\Username\AppData\Roaming\Bitcoin
-    // macOS: ~/Library/Application Support/Bitcoin
-    // Unix-like: ~/.bitcoin
+    // Windows: C:\Users\Username\AppData\Roaming\Bitcoin-PoS
+    // macOS: ~/Library/Application Support/Bitcoin-PoS
+    // Unix-like: ~/.bitcoin-pos
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitcoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitcoin-PoS";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -666,10 +665,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // macOS
-    return pathRet / "Library/Application Support/Bitcoin";
+    return pathRet / "Library/Application Support/Bitcoin-PoS";
 #else
     // Unix-like
-    return pathRet / ".bitcoin";
+    return pathRet / ".bitcoin-pos";
 #endif
 #endif
 }
@@ -1188,6 +1187,22 @@ void runCommand(const std::string& strCommand)
         LogPrintf("runCommand error: system(%s) returned %d\n", strCommand, nErr);
 }
 #endif
+
+void RenameThread(const char* name)
+{
+#if defined(PR_SET_NAME)
+    // Only the first 15 characters are used (16 - NUL terminator)
+    ::prctl(PR_SET_NAME, name, 0, 0, 0);
+#elif (defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__DragonFly__))
+    pthread_set_name_np(pthread_self(), name);
+
+#elif defined(MAC_OSX)
+    pthread_setname_np(name);
+#else
+    // Prevent warnings for unused parameters...
+    (void)name;
+#endif
+}
 
 #ifdef HAVE_BOOST_PROCESS
 UniValue RunCommandParseJSON(const std::string& str_command, const std::string& str_std_in)

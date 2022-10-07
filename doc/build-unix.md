@@ -33,6 +33,7 @@ These dependencies are required:
 
  Library     | Purpose          | Description
  ------------|------------------|----------------------
+ libssl      | Crypto           | Random Number Generation, Elliptic Curve Cryptography
  libboost    | Utility          | Library for threading, data structures, etc
  libevent    | Networking       | OS independent asynchronous networking
 
@@ -81,7 +82,7 @@ Build requirements:
 
 Now, you can either build from self-compiled [depends](/depends/README.md) or install the required dependencies:
 
-    sudo apt-get install libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev
+    sudo apt-get install libssl-dev libevent-dev libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev
 
 BerkeleyDB is required for the wallet.
 
@@ -92,6 +93,22 @@ pass `--with-incompatible-bdb` to configure.
 
 Otherwise, you can build from self-compiled `depends` (see above).
 
+    wget http://download.oracle.com/berkeley-db/db-4.8.30.zip
+    unzip db-4.8.30.zip
+
+Line 147, replace __atomic_compare_exchange((p), (o), (n)) with __atomic_compare_exchange_db((p), (o), (n))
+
+Line 179, replace static inline int __atomic_compare_exchange( with static inline int __atomic_compare_exchange_db(
+        
+    cd db-4.8.30
+    cd build_unix/
+    ../dist/configure --prefix=/usr/local --enable-cxx
+    make
+    make install
+
+
+
+    
 SQLite is required for the wallet:
 
     sudo apt install libsqlite3-dev
@@ -297,5 +314,13 @@ To build executables for ARM:
     ./configure --prefix=$PWD/depends/arm-linux-gnueabihf --enable-glibc-back-compat --enable-reduce-exports LDFLAGS=-static-libstdc++
     make
 
-
+Portable Linux build
+-------------------
+    cd depends
+    make
+    cd ..
+    ./autogen.sh
+    ./configure --enable-glibc-back-compat --prefix=`pwd`/depends/x86_64-pc-linux-gnu LDFLAGS="-static-libstdc++"
+    make
+    
 For further documentation on the depends system see [README.md](../depends/README.md) in the depends directory.

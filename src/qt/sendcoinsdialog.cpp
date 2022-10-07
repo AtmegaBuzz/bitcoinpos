@@ -54,7 +54,7 @@ int getIndexForConfTarget(int target) {
     return confTargets.size() - 1;
 }
 
-SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *parent) :
+SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *parent, bool _forDelegation) :
     QDialog(parent),
     ui(new Ui::SendCoinsDialog),
     clientModel(nullptr),
@@ -62,7 +62,8 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *p
     m_coin_control(new CCoinControl),
     fNewRecipientAllowed(true),
     fFeeMinimized(true),
-    platformStyle(_platformStyle)
+    platformStyle(_platformStyle),
+    forDelegation(false)
 {
     ui->setupUi(this);
 
@@ -74,6 +75,12 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *p
         ui->addButton->setIcon(_platformStyle->SingleColorIcon(":/icons/add"));
         ui->clearButton->setIcon(_platformStyle->SingleColorIcon(":/icons/remove"));
         ui->sendButton->setIcon(_platformStyle->SingleColorIcon(":/icons/send"));
+    }
+
+    if (forDelegation)
+    {
+        ui->sendButton->setText("&Delegate");
+        ui->addButton->hide();
     }
 
     GUIUtil::setupAddressWidget(ui->lineEditCoinControlChange, this);
@@ -264,7 +271,7 @@ bool SendCoinsDialog::PrepareSendText(QString& question_string, QString& informa
 
     updateCoinControlState(*m_coin_control);
 
-    prepareStatus = model->prepareTransaction(*m_current_transaction, *m_coin_control);
+    prepareStatus = model->prepareTransaction(*m_current_transaction, *m_coin_control, false);
 
     // process prepareStatus and on error generate message shown to user
     processSendCoinsReturn(prepareStatus,
@@ -427,7 +434,7 @@ void SendCoinsDialog::on_sendButton_clicked()
             if (filename.isEmpty()) {
                 return;
             }
-            std::ofstream out(filename.toLocal8Bit().data(), std::ofstream::out | std::ofstream::binary);
+            std::ofstream out(filename.toLocal8Bit().data());
             out << ssTx.str();
             out.close();
             Q_EMIT message(tr("PSBT saved"), "PSBT saved to disk", CClientUIInterface::MSG_INFORMATION);
@@ -491,7 +498,7 @@ void SendCoinsDialog::accept()
 
 SendCoinsEntry *SendCoinsDialog::addEntry()
 {
-    SendCoinsEntry *entry = new SendCoinsEntry(platformStyle, this);
+    SendCoinsEntry *entry = new SendCoinsEntry(platformStyle, this, forDelegation);
     entry->setModel(model);
     ui->entries->addWidget(entry);
     connect(entry, &SendCoinsEntry::removeEntry, this, &SendCoinsDialog::removeEntry);
@@ -619,6 +626,11 @@ void SendCoinsDialog::updateDisplayUnit()
     updateSmartFeeLabel();
 }
 
+void SendCoinsDialog::updateBalanceWithDelegations()
+{
+    setBalance(model->wallet().getBalances());
+}
+
 void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn &sendCoinsReturn, const QString &msgArg)
 {
     QPair<QString, CClientUIInterface::MessageBoxFlags> msgParams;
@@ -653,6 +665,14 @@ void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn 
         break;
     case WalletModel::PaymentRequestExpired:
         msgParams.first = tr("Payment request expired.");
+        msgParams.second = CClientUIInterface::MSG_ERROR;
+        break;
+    case WalletModel::OwnerAddressNotInWallet:
+        msgParams.first = tr("The provided owner address is not present in this wallet. WARNING: Only the owner of the key to owner address will be allowed to spend these coins after the delegation.");
+        msgParams.second = CClientUIInterface::MSG_ERROR;
+        break;
+    case WalletModel::StakerAddressInWallet:
+        msgParams.first = tr("The provided staker address is present in this wallet. You can already stake the coins, there is no need to delegate them to yourself.");
         msgParams.second = CClientUIInterface::MSG_ERROR;
         break;
     // included to prevent a compiler warning.
@@ -691,7 +711,7 @@ void SendCoinsDialog::useAvailableBalance(SendCoinsEntry* entry)
     m_coin_control->fAllowWatchOnly = model->wallet().privateKeysDisabled();
 
     // Calculate available amount to send.
-    CAmount amount = model->wallet().getAvailableBalance(*m_coin_control);
+    CAmount amount = model->wallet().getAvailableBalance(*m_coin_control, false);
     for (int i = 0; i < ui->entries->count(); ++i) {
         SendCoinsEntry* e = qobject_cast<SendCoinsEntry*>(ui->entries->itemAt(i)->widget());
         if (e && !e->isHidden() && e != entry) {
@@ -940,7 +960,7 @@ void SendCoinsDialog::coinControlUpdateLabels()
     if (m_coin_control->HasSelected())
     {
         // actual coin control calculation
-        CoinControlDialog::updateLabels(*m_coin_control, model, this);
+        CoinControlDialog::updateLabels(*m_coin_control, model, this, forDelegation);
 
         // show coin control stats
         ui->labelCoinControlAutomaticallySelected->hide();
@@ -966,9 +986,6 @@ SendConfirmationDialog::SendConfirmationDialog(const QString& title, const QStri
     setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
     setDefaultButton(QMessageBox::Cancel);
     yesButton = button(QMessageBox::Yes);
-    if (confirmButtonText.isEmpty()) {
-        confirmButtonText = yesButton->text();
-    }
     updateYesButton();
     connect(&countDownTimer, &QTimer::timeout, this, &SendConfirmationDialog::countDown);
 }

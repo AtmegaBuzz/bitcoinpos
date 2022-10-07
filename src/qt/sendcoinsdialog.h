@@ -33,7 +33,7 @@ class SendCoinsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *parent = nullptr);
+    explicit SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *parent = nullptr, bool forDelegation = false);
     ~SendCoinsDialog();
 
     void setClientModel(ClientModel *clientModel);
@@ -67,6 +67,7 @@ private:
     bool fNewRecipientAllowed;
     bool fFeeMinimized;
     const PlatformStyle *platformStyle;
+    bool forDelegation;
 
     // Process WalletModel::SendCoinsReturn and generate a pair consisting
     // of a message and message flags for use in Q_EMIT message().
@@ -86,6 +87,7 @@ private Q_SLOTS:
     void removeEntry(SendCoinsEntry* entry);
     void useAvailableBalance(SendCoinsEntry* entry);
     void updateDisplayUnit();
+    void updateBalanceWithDelegations();
     void coinControlFeatureChanged(bool);
     void coinControlButtonClicked();
     void coinControlChangeChecked(int);
@@ -115,7 +117,7 @@ class SendConfirmationDialog : public QMessageBox
     Q_OBJECT
 
 public:
-    SendConfirmationDialog(const QString& title, const QString& text, const QString& informative_text = "", const QString& detailed_text = "", int secDelay = SEND_CONFIRM_DELAY, const QString& confirmText = "", QWidget* parent = nullptr);
+    SendConfirmationDialog(const QString& title, const QString& text, const QString& informative_text = "", const QString& detailed_text = "", int secDelay = SEND_CONFIRM_DELAY, const QString& confirmText = "Send", QWidget* parent = nullptr);
     int exec() override;
 
 private Q_SLOTS:

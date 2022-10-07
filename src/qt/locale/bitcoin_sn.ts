@@ -142,10 +142,6 @@
     </context>
 <context>
     <name>CreateWalletDialog</name>
-    <message>
-        <source>Wallet</source>
-        <translation>Chikwama</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>

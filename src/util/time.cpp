@@ -9,10 +9,9 @@
 
 #include <util/time.h>
 
-#include <util/check.h>
-
 #include <atomic>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/thread.hpp>
 #include <ctime>
 #include <thread>
 
@@ -20,7 +19,9 @@
 
 void UninterruptibleSleep(const std::chrono::microseconds& n) { std::this_thread::sleep_for(n); }
 
-static std::atomic<int64_t> nMockTime(0); //!< For testing
+void InterruptibleSleep(const std::chrono::microseconds& n) { boost::this_thread::sleep_for(boost::chrono::microseconds(n.count())); }
+
+static std::atomic<int64_t> nMockTime(0); //!< For unit testing
 
 int64_t GetTime()
 {
@@ -48,7 +49,6 @@ template std::chrono::microseconds GetTime();
 
 void SetMockTime(int64_t nMockTimeIn)
 {
-    Assert(nMockTimeIn >= 0);
     nMockTime.store(nMockTimeIn, std::memory_order_relaxed);
 }
 

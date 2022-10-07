@@ -236,8 +236,6 @@ static RPCHelpMan getpeerinfo()
                 heights.push_back(height);
             }
             obj.pushKV("inflight", heights);
-            obj.pushKV("addr_processed", statestats.m_addr_processed);
-            obj.pushKV("addr_rate_limited", statestats.m_addr_rate_limited);
         }
         if (IsDeprecatedRPCEnabled("whitelisted")) {
             // whitelisted is deprecated in v0.21 for removal in v0.22
@@ -286,8 +284,8 @@ static RPCHelpMan addnode()
                 },
                 RPCResult{RPCResult::Type::NONE, "", ""},
                 RPCExamples{
-                    HelpExampleCli("addnode", "\"192.168.0.6:8333\" \"onetry\"")
-            + HelpExampleRpc("addnode", "\"192.168.0.6:8333\", \"onetry\"")
+                    HelpExampleCli("addnode", "\"192.168.0.6:48930\" \"onetry\"")
+            + HelpExampleRpc("addnode", "\"192.168.0.6:48930\", \"onetry\"")
                 },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
@@ -340,9 +338,9 @@ static RPCHelpMan disconnectnode()
                 },
                 RPCResult{RPCResult::Type::NONE, "", ""},
                 RPCExamples{
-                    HelpExampleCli("disconnectnode", "\"192.168.0.6:8333\"")
+                    HelpExampleCli("disconnectnode", "\"192.168.0.6:48930\"")
             + HelpExampleCli("disconnectnode", "\"\" 1")
-            + HelpExampleRpc("disconnectnode", "\"192.168.0.6:8333\"")
+            + HelpExampleRpc("disconnectnode", "\"192.168.0.6:48930\"")
             + HelpExampleRpc("disconnectnode", "\"\", 1")
                 },
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue

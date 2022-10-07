@@ -83,6 +83,16 @@ static bool MatchPayToPubkeyHash(const CScript& script, valtype& pubkeyhash)
     return false;
 }
 
+static bool MatchPayToColdStaking(const CScript& script, valtype& stakerPubKeyHash, valtype& ownerPubKeyHash)
+{
+    if (script.IsPayToColdStaking()) {
+        stakerPubKeyHash = valtype(script.begin () + 6, script.begin() + 26);
+        ownerPubKeyHash = valtype(script.begin () + 28, script.begin() + 48);
+        return true;
+    }
+    return false;
+}
+
 /** Test for "small positive integer" script opcodes - OP_1 through OP_16. */
 static constexpr bool IsSmallInteger(opcodetype opcode)
 {
@@ -177,10 +187,14 @@ TxoutType Solver(const CScript& scriptPubKey, std::vector<std::vector<unsigned c
     return TxoutType::NONSTANDARD;
 }
 
-bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
+bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet, TxoutType *typeRet, bool fColdStake)
 {
     std::vector<valtype> vSolutions;
     TxoutType whichType = Solver(scriptPubKey, vSolutions);
+
+    if(typeRet){
+        *typeRet = whichType;
+    }
 
     if (whichType == TxoutType::PUBKEY) {
         CPubKey pubKey(vSolutions[0]);
@@ -316,6 +330,16 @@ CScript GetScriptForMultisig(int nRequired, const std::vector<CPubKey>& keys)
     for (const CPubKey& key : keys)
         script << ToByteVector(key);
     script << CScript::EncodeOP_N(keys.size()) << OP_CHECKMULTISIG;
+    return script;
+}
+
+CScript GetScriptForStakeDelegation(const CKeyID& stakingKey, const CKeyID& spendingKey)
+{
+    CScript script;
+    script << OP_DUP << OP_HASH160 << OP_ROT <<
+            OP_IF << OP_CHECKCOLDSTAKEVERIFY << ToByteVector(stakingKey) <<
+            OP_ELSE << ToByteVector(spendingKey) << OP_ENDIF <<
+            OP_EQUALVERIFY << OP_CHECKSIG;
     return script;
 }
 

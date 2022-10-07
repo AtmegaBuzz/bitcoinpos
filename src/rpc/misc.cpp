@@ -360,13 +360,13 @@ static RPCHelpMan signmessagewithprivkey()
 static RPCHelpMan setmocktime()
 {
     return RPCHelpMan{"setmocktime",
-        "\nSet the local time to given timestamp (-regtest only)\n",
-        {
-            {"timestamp", RPCArg::Type::NUM, RPCArg::Optional::NO, UNIX_EPOCH_TIME + "\n"
-             "Pass 0 to go back to using the system time."},
-        },
-        RPCResult{RPCResult::Type::NONE, "", ""},
-        RPCExamples{""},
+                "\nSet the local time to given timestamp (-regtest only)\n",
+                {
+                    {"timestamp", RPCArg::Type::NUM, RPCArg::Optional::NO, UNIX_EPOCH_TIME + "\n"
+            "   Pass 0 to go back to using the system time."},
+                },
+                RPCResult{RPCResult::Type::NONE, "", ""},
+                RPCExamples{""},
         [&](const RPCHelpMan& self, const JSONRPCRequest& request) -> UniValue
 {
     if (!Params().IsMockableChain()) {
@@ -381,14 +381,10 @@ static RPCHelpMan setmocktime()
     LOCK(cs_main);
 
     RPCTypeCheck(request.params, {UniValue::VNUM});
-    const int64_t time{request.params[0].get_int64()};
-    if (time < 0) {
-        throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("Mocktime can not be negative: %s.", time));
-    }
+    int64_t time = request.params[0].get_int64();
     SetMockTime(time);
     if (request.context.Has<NodeContext>()) {
-        const auto& chain_clients = request.context.Get<NodeContext>().chain_clients;
-        for (const auto& chain_client : chain_clients) {
+        for (const auto& chain_client : request.context.Get<NodeContext>().chain_clients) {
             chain_client->setMockTime(time);
         }
     }
@@ -611,7 +607,7 @@ static RPCHelpMan echo(const std::string& name)
                 "\nSimply echo back the input arguments. This command is for testing.\n"
                 "\nIt will return an internal bug report when arg9='trigger_internal_bug' is passed.\n"
                 "\nThe difference between echo and echojson is that echojson has argument conversion enabled in the client-side table in "
-                "bitcoin-cli and the GUI. There is no server-side difference.",
+                "bitcoin-pos-cli and the GUI. There is no server-side difference.",
                 {
                     {"arg0", RPCArg::Type::STR, RPCArg::Optional::OMITTED_NAMED_ARG, ""},
                     {"arg1", RPCArg::Type::STR, RPCArg::Optional::OMITTED_NAMED_ARG, ""},

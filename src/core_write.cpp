@@ -174,6 +174,7 @@ void ScriptPubKeyToUniv(const CScript& scriptPubKey,
     for (const CTxDestination& addr : addresses) {
         a.push_back(EncodeDestination(addr));
     }
+    
     out.pushKV("addresses", a);
 }
 

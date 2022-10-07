@@ -97,9 +97,9 @@ static int AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || HelpRequested(gArgs)) {
         // First part of help message is specific to this utility
-        std::string strUsage = PACKAGE_NAME " bitcoin-tx utility version " + FormatFullVersion() + "\n\n" +
-            "Usage:  bitcoin-tx [options] <hex-tx> [commands]  Update hex-encoded bitcoin transaction\n" +
-            "or:     bitcoin-tx [options] -create [commands]   Create hex-encoded bitcoin transaction\n" +
+        std::string strUsage = PACKAGE_NAME " bitcoin-pos-tx utility version " + FormatFullVersion() + "\n\n" +
+            "Usage:  bitcoin-pos-tx [options] <hex-tx> [commands]  Update hex-encoded bitcoin transaction\n" +
+            "or:     bitcoin-pos-tx [options] -create [commands]   Create hex-encoded bitcoin transaction\n" +
             "\n";
         strUsage += gArgs.GetHelpMessage();
 
@@ -647,7 +647,7 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
         SignatureData sigdata = DataFromTransaction(mergedTx, i, coin.out);
         // Only sign SIGHASH_SINGLE if there's a corresponding output:
         if (!fHashSingle || (i < mergedTx.vout.size()))
-            ProduceSignature(keystore, MutableTransactionSignatureCreator(&mergedTx, i, amount, nHashType), prevPubKey, sigdata);
+            ProduceSignature(keystore, MutableTransactionSignatureCreator(&mergedTx, i, amount, nHashType), prevPubKey, sigdata, false);
 
         UpdateInput(txin, sigdata);
     }

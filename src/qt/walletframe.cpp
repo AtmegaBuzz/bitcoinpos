@@ -106,24 +106,9 @@ void WalletFrame::setCurrentWallet(WalletModel* wallet_model)
 {
     if (mapWalletViews.count(wallet_model) == 0) return;
 
-    // Stop the effect of hidden widgets on the size hint of the shown one in QStackedWidget.
-    WalletView* view_about_to_hide = currentWalletView();
-    if (view_about_to_hide) {
-        QSizePolicy sp = view_about_to_hide->sizePolicy();
-        sp.setHorizontalPolicy(QSizePolicy::Ignored);
-        view_about_to_hide->setSizePolicy(sp);
-    }
-
     WalletView *walletView = mapWalletViews.value(wallet_model);
-    assert(walletView);
-
-    // Set or restore the default QSizePolicy which could be set to QSizePolicy::Ignored previously.
-    QSizePolicy sp = walletView->sizePolicy();
-    sp.setHorizontalPolicy(QSizePolicy::Preferred);
-    walletView->setSizePolicy(sp);
-    walletView->updateGeometry();
-
     walletStack->setCurrentWidget(walletView);
+    assert(walletView);
     walletView->updateEncryptionStatus();
 }
 
@@ -189,6 +174,13 @@ void WalletFrame::gotoSendCoinsPage(QString addr)
         i.value()->gotoSendCoinsPage(addr);
 }
 
+void WalletFrame::gotoStakePage()
+{
+    QMap<WalletModel*, WalletView*>::const_iterator i;
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+        i.value()->gotoStakePage();
+}
+
 void WalletFrame::gotoSignMessageTab(QString addr)
 {
     WalletView *walletView = currentWalletView();
@@ -235,8 +227,10 @@ void WalletFrame::changePassphrase()
 void WalletFrame::unlockWallet()
 {
     WalletView *walletView = currentWalletView();
-    if (walletView)
+    if (walletView) {
         walletView->unlockWallet();
+        walletView->getWalletModel()->setWalletUnlockStakingOnly(false);
+    }
 }
 
 void WalletFrame::usedSendingAddresses()

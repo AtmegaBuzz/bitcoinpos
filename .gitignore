@@ -1,14 +1,14 @@
 *.tar.gz
-
+.vscode
 *.exe
 *.pdb
 src/bitcoin
-src/bitcoind
-src/bitcoin-cli
-src/bitcoin-gui
-src/bitcoin-node
-src/bitcoin-tx
-src/bitcoin-wallet
+src/bitcoin-posd
+src/bitcoin-pos-cli
+src/bitcoin-pos-gui
+src/bitcoin-pos-node
+src/bitcoin-pos-tx
+src/bitcoin-pos-wallet
 src/test/fuzz/*
 !src/test/fuzz/*.*
 src/test/test_bitcoin
@@ -92,8 +92,8 @@ src/qt/bitcoin-qt.includes
 *.qm
 Makefile
 !depends/Makefile
-src/qt/bitcoin-qt
-Bitcoin-Qt.app
+src/qt/bitcoin-pos-qt
+bitcoin-pos-qt.app
 background.tiff*
 
 # Qt Creator
@@ -143,7 +143,7 @@ contrib/devtools/split-debug.sh
 db4/
 
 # clang-check
-*.plist
+#*.plist
 
 osx_volname
 dist/

@@ -145,7 +145,7 @@ void PSBTOperationsDialog::saveTransaction() {
     if (filename.isEmpty()) {
         return;
     }
-    std::ofstream out(filename.toLocal8Bit().data(), std::ofstream::out | std::ofstream::binary);
+    std::ofstream out(filename.toLocal8Bit().data());
     out << ssTx.str();
     out.close();
     showStatus(tr("PSBT saved to disk."), StatusLevel::INFO);
@@ -165,7 +165,7 @@ std::string PSBTOperationsDialog::renderTransaction(const PartiallySignedTransac
         ExtractDestination(out.scriptPubKey, address);
         totalAmount += out.nValue;
         tx_description.append(tr(" * Sends %1 to %2")
-            .arg(BitcoinUnits::formatWithUnit(BitcoinUnits::BTC, out.nValue))
+            .arg(BitcoinUnits::formatWithUnit(BitcoinUnits::BTCS, out.nValue))
             .arg(QString::fromStdString(EncodeDestination(address))));
         tx_description.append("<br>");
     }
@@ -177,7 +177,7 @@ std::string PSBTOperationsDialog::renderTransaction(const PartiallySignedTransac
         tx_description.append(tr("Unable to calculate transaction fee or total transaction amount."));
     } else {
         tx_description.append(tr("Pays transaction fee: "));
-        tx_description.append(BitcoinUnits::formatWithUnit(BitcoinUnits::BTC, *analysis.fee));
+        tx_description.append(BitcoinUnits::formatWithUnit(BitcoinUnits::BTCS, *analysis.fee));
 
         // add total amount in all subdivision units
         tx_description.append("<hr />");

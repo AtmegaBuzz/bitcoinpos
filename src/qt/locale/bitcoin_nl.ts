@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>Rechtermuisklik om adres of label aan te passen</translation>
+        <translation>rechts klikken op adres of label te wijzigen</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -139,7 +139,7 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Show passphrase</source>
-        <translation>Laat wachtwoordzin zien</translation>
+        <translation>Laat wachtwoord zien</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -147,11 +147,11 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Deze bewerking heeft uw portemonnee-wachtwoordzin nodig om de portemonnee te ontgrendelen.</translation>
+        <translation>Deze operatie vereist uw portemonneewachtwoord om de portemonnee te openen.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>portemonnee ontgrendelen&lt;br&gt;&lt;br&gt;</translation>
+        <translation>Open portemonnee</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
@@ -163,11 +163,11 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     </message>
     <message>
         <source>Change passphrase</source>
-        <translation>Wijzig wachtwoordzin</translation>
+        <translation>Wijzig wachtwoord</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
-        <translation>Bevestig de versleuteling van de portemonnee</translation>
+        <translation>Bevestig versleuteling van de portemonnee</translation>
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
@@ -845,10 +845,6 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
         <translation>Creëer wallet</translation>
     </message>
     <message>
-        <source>Wallet</source>
-        <translation>Portemonnee</translation>
-    </message>
-    <message>
         <source>Wallet Name</source>
         <translation>Wallet Naam</translation>
     </message>
@@ -859,10 +855,6 @@ Ondertekenen is alleen mogelijk met adressen van het type 'legacy'.</translation
     <message>
         <source>Encrypt Wallet</source>
         <translation>Versleutel portemonnee</translation>
-    </message>
-    <message>
-        <source>Advanced Options</source>
-        <translation>Geavanceerde Opties</translation>
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>

@@ -12,7 +12,7 @@
  * for both bitcoind and bitcoin-qt, to make it harder for attackers to
  * target servers or GUI users specifically.
  */
-const std::string CLIENT_NAME("Satoshi");
+const std::string CLIENT_NAME("BitcoinPoS");
 
 
 #ifdef HAVE_BUILD_INFO
@@ -24,7 +24,8 @@ const std::string CLIENT_NAME("Satoshi");
 //   - "// No build information available", if proper git information is not available
 #endif
 
-//! git will put "#define GIT_COMMIT_ID ..." on the next line inside archives. $Format:%n#define GIT_COMMIT_ID "%H"$
+//! git will put "#define GIT_COMMIT_ID ..." on the next line inside archives. 
+#define GIT_COMMIT_ID "80e9d03790538a4bf0906184bd5f2d4682a6a417"
 
 #ifdef BUILD_GIT_TAG
     #define BUILD_DESC BUILD_GIT_TAG

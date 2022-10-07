@@ -576,10 +576,6 @@
     </context>
 <context>
     <name>CreateWalletDialog</name>
-    <message>
-        <source>Wallet</source>
-        <translation>Veski</translation>
-    </message>
     </context>
 <context>
     <name>EditAddressDialog</name>

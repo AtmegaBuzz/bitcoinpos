@@ -897,6 +897,11 @@
    <extends>QComboBox</extends>
    <header>qt/qvaluecombobox.h</header>
   </customwidget>
+  <customwidget>
+   <class>BitcoinAmountField</class>
+   <extends>QSpinBox</extends>
+   <header>qt/bitcoinamountfield.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>

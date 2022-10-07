@@ -2,10 +2,10 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-bin_PROGRAMS += qt/bitcoin-qt
+bin_PROGRAMS += qt/bitcoin-pos-qt
 
 if BUILD_BITCOIN_GUI
-  bin_PROGRAMS += bitcoin-gui
+  bin_PROGRAMS += bitcoin-pos-gui
 endif
 
 EXTRA_LIBRARIES += qt/libbitcoinqt.a
@@ -29,6 +29,7 @@ QT_FORMS_UI = \
   qt/forms/receivecoinsdialog.ui \
   qt/forms/receiverequestdialog.ui \
   qt/forms/debugwindow.ui \
+  qt/forms/stakepage.ui \
   qt/forms/sendcoinsdialog.ui \
   qt/forms/sendcoinsentry.ui \
   qt/forms/signverifymessagedialog.ui \
@@ -41,6 +42,7 @@ QT_MOC_CPP = \
   qt/moc_createwalletdialog.cpp \
   qt/moc_bantablemodel.cpp \
   qt/moc_bitcoinaddressvalidator.cpp \
+  qt/moc_bitcoinaddresstypes.cpp \
   qt/moc_bitcoinamountfield.cpp \
   qt/moc_bitcoin.cpp \
   qt/moc_bitcoingui.cpp \
@@ -64,12 +66,14 @@ QT_MOC_CPP = \
   qt/moc_paymentserver.cpp \
   qt/moc_psbtoperationsdialog.cpp \
   qt/moc_qrimagewidget.cpp \
+  qt/moc_qswitchcontrol.cpp \
   qt/moc_qvalidatedlineedit.cpp \
   qt/moc_qvaluecombobox.cpp \
   qt/moc_receivecoinsdialog.cpp \
   qt/moc_receiverequestdialog.cpp \
   qt/moc_recentrequeststablemodel.cpp \
   qt/moc_rpcconsole.cpp \
+  qt/moc_stakepage.cpp \
   qt/moc_sendcoinsdialog.cpp \
   qt/moc_sendcoinsentry.cpp \
   qt/moc_signverifymessagedialog.cpp \
@@ -78,7 +82,6 @@ QT_MOC_CPP = \
   qt/moc_transactiondesc.cpp \
   qt/moc_transactiondescdialog.cpp \
   qt/moc_transactionfilterproxy.cpp \
-  qt/moc_transactionoverviewwidget.cpp \
   qt/moc_transactiontablemodel.cpp \
   qt/moc_transactionview.cpp \
   qt/moc_utilitydialog.cpp \
@@ -96,7 +99,8 @@ QT_MOC = \
   qt/bitcoinamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
-  qt/rpcconsole.moc
+  qt/rpcconsole.moc \
+  qt/walletmodel.moc
 
 QT_QRC_CPP = qt/qrc_bitcoin.cpp
 QT_QRC = qt/bitcoin.qrc
@@ -109,6 +113,7 @@ BITCOIN_QT_H = \
   qt/askpassphrasedialog.h \
   qt/bantablemodel.h \
   qt/bitcoinaddressvalidator.h \
+  qt/bitcoinaddresstypes.h \
   qt/bitcoinamountfield.h \
   qt/bitcoin.h \
   qt/bitcoingui.h \
@@ -137,6 +142,7 @@ BITCOIN_QT_H = \
   qt/platformstyle.h \
   qt/psbtoperationsdialog.h \
   qt/qrimagewidget.h \
+  qt/qswitchcontrol.h \
   qt/qvalidatedlineedit.h \
   qt/qvaluecombobox.h \
   qt/receivecoinsdialog.h \
@@ -148,11 +154,11 @@ BITCOIN_QT_H = \
   qt/sendcoinsrecipient.h \
   qt/signverifymessagedialog.h \
   qt/splashscreen.h \
+  qt/stakepage.h \
   qt/trafficgraphwidget.h \
   qt/transactiondesc.h \
   qt/transactiondescdialog.h \
   qt/transactionfilterproxy.h \
-  qt/transactionoverviewwidget.h \
   qt/transactionrecord.h \
   qt/transactiontablemodel.h \
   qt/transactionview.h \
@@ -210,12 +216,17 @@ RES_ICONS = \
   qt/res/icons/tx_input.png \
   qt/res/icons/tx_output.png \
   qt/res/icons/tx_mined.png \
-  qt/res/icons/warning.png
+  qt/res/icons/tx_cold.png \
+  qt/res/icons/warning.png \
+  qt/res/icons/staking_on.png \
+  qt/res/icons/staking_off.png \
+  qt/res/icons/lock_staking.png
 
 BITCOIN_QT_BASE_CPP = \
   qt/bantablemodel.cpp \
   qt/bitcoin.cpp \
   qt/bitcoinaddressvalidator.cpp \
+  qt/bitcoinaddresstypes.cpp \
   qt/bitcoinamountfield.cpp \
   qt/bitcoingui.cpp \
   qt/bitcoinunits.cpp \
@@ -230,6 +241,7 @@ BITCOIN_QT_BASE_CPP = \
   qt/optionsmodel.cpp \
   qt/peertablemodel.cpp \
   qt/platformstyle.cpp \
+  qt/qswitchcontrol.cpp \
   qt/qvalidatedlineedit.cpp \
   qt/qvaluecombobox.cpp \
   qt/rpcconsole.cpp \
@@ -255,6 +267,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/receivecoinsdialog.cpp \
   qt/receiverequestdialog.cpp \
   qt/recentrequeststablemodel.cpp \
+  qt/stakepage.cpp \
   qt/sendcoinsdialog.cpp \
   qt/sendcoinsentry.cpp \
   qt/signverifymessagedialog.cpp \
@@ -303,43 +316,43 @@ QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:
 # Most files will depend on the forms and moc files as includes. Generate them
 # before anything else.
 $(QT_MOC): $(QT_FORMS_H)
-$(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcoin_qt_OBJECTS) $(bitcoin_gui_OBJECTS) : | $(QT_MOC)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcoin_pos_qt_OBJECTS) $(bitcoin_pos_gui_OBJECTS) : | $(QT_MOC)
 
-# bitcoin-qt and bitcoin-gui binaries #
-bitcoin_qt_cppflags = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+# bitcoin-pos-qt and bitcoin-pos-gui binaries #
+bitcoin_pos_qt_cppflags = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
   $(QT_INCLUDES) $(QR_CFLAGS)
-bitcoin_qt_cxxflags = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+bitcoin_pos_qt_cxxflags = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-bitcoin_qt_sources = qt/main.cpp
+bitcoin_pos_qt_sources = qt/main.cpp
 if TARGET_WINDOWS
-  bitcoin_qt_sources += $(BITCOIN_RC)
+  bitcoin_pos_qt_sources += $(BITCOIN_RC)
 endif
-bitcoin_qt_ldadd = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+bitcoin_pos_qt_ldadd = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
 if ENABLE_WALLET
-bitcoin_qt_ldadd += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+bitcoin_pos_qt_ldadd += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
 endif
 if ENABLE_ZMQ
-bitcoin_qt_ldadd += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+bitcoin_pos_qt_ldadd += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 endif
-bitcoin_qt_ldadd += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
-  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+bitcoin_pos_qt_ldadd += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
   $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(SQLITE_LIBS)
-bitcoin_qt_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
-bitcoin_qt_libtoolflags = $(AM_LIBTOOLFLAGS) --tag CXX
+bitcoin_pos_qt_ldflags = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) $(PTHREAD_FLAGS)
+bitcoin_pos_qt_libtoolflags = $(AM_LIBTOOLFLAGS) --tag CXX
 
-qt_bitcoin_qt_CPPFLAGS = $(bitcoin_qt_cppflags)
-qt_bitcoin_qt_CXXFLAGS = $(bitcoin_qt_cxxflags)
-qt_bitcoin_qt_SOURCES = $(bitcoin_qt_sources)
-qt_bitcoin_qt_LDADD = $(bitcoin_qt_ldadd)
-qt_bitcoin_qt_LDFLAGS = $(bitcoin_qt_ldflags)
-qt_bitcoin_qt_LIBTOOLFLAGS = $(bitcoin_qt_libtoolflags)
+qt_bitcoin_pos_qt_CPPFLAGS = $(bitcoin_pos_qt_cppflags)
+qt_bitcoin_pos_qt_CXXFLAGS = $(bitcoin_pos_qt_cxxflags)
+qt_bitcoin_pos_qt_SOURCES = $(bitcoin_pos_qt_sources)
+qt_bitcoin_pos_qt_LDADD = $(bitcoin_pos_qt_ldadd)
+qt_bitcoin_pos_qt_LDFLAGS = $(bitcoin_pos_qt_ldflags)
+qt_bitcoin_pos_qt_LIBTOOLFLAGS = $(bitcoin_pos_qt_libtoolflags)
 
-bitcoin_gui_CPPFLAGS = $(bitcoin_qt_cppflags)
-bitcoin_gui_CXXFLAGS = $(bitcoin_qt_cxxflags)
-bitcoin_gui_SOURCES = $(bitcoin_qt_sources)
-bitcoin_gui_LDADD = $(bitcoin_qt_ldadd)
-bitcoin_gui_LDFLAGS = $(bitcoin_qt_ldflags)
-bitcoin_gui_LIBTOOLFLAGS = $(bitcoin_qt_libtoolflags)
+bitcoin_pos_gui_CPPFLAGS = $(bitcoin_pos_qt_cppflags)
+bitcoin_pos_gui_CXXFLAGS = $(bitcoin_pos_qt_cxxflags)
+bitcoin_pos_gui_SOURCES = $(bitcoin_pos_qt_sources)
+bitcoin_pos_gui_LDADD = $(bitcoin_pos_qt_ldadd)
+bitcoin_pos_gui_LDFLAGS = $(bitcoin_pos_qt_ldflags)
+bitcoin_pos_gui_LIBTOOLFLAGS = $(bitcoin_pos_qt_libtoolflags)
 
 #locale/foo.ts -> locale/foo.qm
 QT_QM=$(QT_TS:.ts=.qm)
@@ -371,9 +384,9 @@ CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda 
 CLEANFILES += $(CLEAN_QT)
 
 bitcoin_qt_clean: FORCE
-	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcoin_qt_OBJECTS) qt/bitcoin-qt$(EXEEXT) $(LIBBITCOINQT)
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_bitcoin_pos_qt_OBJECTS) qt/bitcoin-pos-qt$(EXEEXT) $(LIBBITCOINQT)
 
-bitcoin_qt : qt/bitcoin-qt$(EXEEXT)
+bitcoin_qt : qt/bitcoin-pos-qt$(EXEEXT)
 
 ui_%.h: %.ui
 	@test -f $(UIC)

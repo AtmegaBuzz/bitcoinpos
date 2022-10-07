@@ -30,6 +30,9 @@
 #include <util/strencodings.h>
 #include <util/system.h>
 #include <validation.h>
+#include <consensus/merkle.h>
+#include <shutdown.h>
+#include <checkpoints.h>
 
 #include <memory>
 #include <typeinfo>
@@ -923,8 +926,6 @@ bool GetNodeStateStats(NodeId nodeid, CNodeStateStats &stats) {
     PeerRef peer = GetPeerRef(nodeid);
     if (peer == nullptr) return false;
     stats.m_misbehavior_score = WITH_LOCK(peer->m_misbehavior_mutex, return peer->m_misbehavior_score);
-    stats.m_addr_processed = peer->m_addr_processed.load();
-    stats.m_addr_rate_limited = peer->m_addr_rate_limited.load();
 
     return true;
 }
@@ -4673,6 +4674,10 @@ bool PeerManager::SendMessages(CNode* pto)
     return true;
 }
 
+void CleanBlockIndex()
+{
+
+}
 class CNetProcessingCleanup
 {
 public:

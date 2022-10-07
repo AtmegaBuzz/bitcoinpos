@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Create a new address</source>
-        <translation>Stwórz nowy adres</translation>
+        <translation>Utwórz nowy adres</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -548,14 +548,6 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
         <translation>Pokaż pomoc %1 aby zobaczyć listę wszystkich opcji lnii poleceń.</translation>
     </message>
     <message>
-        <source>&amp;Mask values</source>
-        <translation>&amp;Schowaj wartości</translation>
-    </message>
-    <message>
-        <source>Mask the values in the Overview tab</source>
-        <translation>Schowaj wartości w zakładce Podsumowanie</translation>
-    </message>
-    <message>
         <source>default wallet</source>
         <translation>domyślny portfel</translation>
     </message>
@@ -667,11 +659,7 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
         <source>Original message:</source>
         <translation>Wiadomość oryginalna:</translation>
     </message>
-    <message>
-        <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
-        <translation>Wystąpił fatalny błąd. %1 nie może być kontynuowany i zostanie zakończony.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>CoinControlDialog</name>
     <message>
@@ -845,10 +833,6 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
         <translation>Stwórz portfel</translation>
     </message>
     <message>
-        <source>Wallet</source>
-        <translation>Portfel</translation>
-    </message>
-    <message>
         <source>Wallet Name</source>
         <translation>Nazwa portfela</translation>
     </message>
@@ -859,10 +843,6 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
     <message>
         <source>Encrypt Wallet</source>
         <translation>Zaszyfruj portfel</translation>
-    </message>
-    <message>
-        <source>Advanced Options</source>
-        <translation>Opcje Zaawansowane</translation>
     </message>
     <message>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
@@ -881,10 +861,6 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
         <translation>Stwórz czysty portfel</translation>
     </message>
     <message>
-        <source>Use descriptors for scriptPubKey management</source>
-        <translation>Użyj deskryptorów do zarządzania scriptPubKey</translation>
-    </message>
-    <message>
         <source>Descriptor Wallet</source>
         <translation>Portfel deskryptora</translation>
     </message>
@@ -892,11 +868,7 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
         <source>Create</source>
         <translation>Stwórz</translation>
     </message>
-    <message>
-        <source>Compiled without sqlite support (required for descriptor wallets)</source>
-        <translation>Skompilowano bez wsparcia sqlite (wymaganego dla deskryptorów potfeli)</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>EditAddressDialog</name>
     <message>
@@ -1511,24 +1483,12 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
         <source>Current total balance in watch-only addresses</source>
         <translation>Łączna kwota na podglądanych adresach</translation>
     </message>
-    <message>
-        <source>Privacy mode activated for the Overview tab. To unmask the values, uncheck Settings-&gt;Mask values.</source>
-        <translation>Tryb Prywatny został włączony dla zakłądki Podgląd. By odkryć wartości, odznacz Ustawienia-&gt;Ukrywaj wartości.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>PSBTOperationsDialog</name>
     <message>
         <source>Dialog</source>
         <translation>Dialog</translation>
-    </message>
-    <message>
-        <source>Sign Tx</source>
-        <translation>Podpisz transakcję (Tx)</translation>
-    </message>
-    <message>
-        <source>Broadcast Tx</source>
-        <translation>Rozgłoś transakcję (Tx)</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
@@ -1577,10 +1537,6 @@ Podpisywanie jest możliwe tylko z adresami typu „legacy”.</translation>
     <message>
         <source>Save Transaction Data</source>
         <translation>Zapisz dane transakcji</translation>
-    </message>
-    <message>
-        <source>Partially Signed Transaction (Binary) (*.psbt)</source>
-        <translation>Częściowo Podpisana Transakcja (*.psbt)</translation>
     </message>
     <message>
         <source>PSBT saved to disk.</source>
@@ -2563,10 +2519,6 @@ Uwaga: Ponieważ opłata jest naliczana za każdy bajt, opłata "100 satoshi za 
         <translation>Zapisz dane transakcji</translation>
     </message>
     <message>
-        <source>Partially Signed Transaction (Binary) (*.psbt)</source>
-        <translation>Częściowo Podpisana Transakcja (*.psbt)</translation>
-    </message>
-    <message>
         <source>PSBT saved</source>
         <translation>Zapisano PSBT</translation>
     </message>
@@ -3409,14 +3361,6 @@ Zwróć uwagę, że poprawnie zweryfikowana wiadomość potwierdza to, że nadaw
 <context>
     <name>WalletFrame</name>
     <message>
-        <source>No wallet has been loaded.
-Go to File &gt; Open Wallet to load a wallet.
-- OR -</source>
-        <translation>Portfel nie został wybrany.
-Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
-</translation>
-    </message>
-    <message>
         <source>Create a new wallet</source>
         <translation>Stwórz nowy portfel</translation>
     </message>
@@ -3590,14 +3534,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation>Wspomóż proszę, jeśli uznasz %s za użyteczne. Odwiedź  %s, aby uzyskać więcej informacji o tym oprogramowaniu.</translation>
     </message>
     <message>
-        <source>SQLiteDatabase: Failed to prepare the statement to fetch the application id: %s</source>
-        <translation>SQLiteDatabase: Nie udało się przygotować zapytania do pobrania identyfikatora aplikacji: %s</translation>
-    </message>
-    <message>
-        <source>SQLiteDatabase: Unknown sqlite wallet schema version %d. Only version %d is supported</source>
-        <translation>SQLiteDatabase: Nieznany schemat portfela sqlite wersji %d. Obsługiwana jest tylko wersja %d</translation>
-    </message>
-    <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>Baza bloków zawiera blok, który wydaje się pochodzić z przyszłości. Może to wynikać z nieprawidłowego ustawienia daty i godziny Twojego komputera. Bazę danych bloków dobuduj tylko, jeśli masz pewność, że data i godzina twojego komputera są poprawne</translation>
     </message>
@@ -3704,10 +3640,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
     <message>
         <source>Failed to verify database</source>
         <translation>Nie udało się zweryfikować bazy danych</translation>
-    </message>
-    <message>
-        <source>Ignoring duplicate -wallet %s.</source>
-        <translation>Ignorowanie duplikatu -wallet %s</translation>
     </message>
     <message>
         <source>Importing...</source>
@@ -3847,14 +3779,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation>Błąd: Nasłuchiwanie połączeń przychodzących nie powiodło się (nasłuch zwrócił błąd %s)</translation>
     </message>
     <message>
-        <source>%s corrupt. Try using the wallet tool bitcoin-wallet to salvage or restoring a backup.</source>
-        <translation>%s jest uszkodzony. Spróbuj użyć narzędzia bitcoin-portfel, aby uratować portfel lub przywrócić kopię zapasową.</translation>
-    </message>
-    <message>
-        <source>Cannot upgrade a non HD split wallet without upgrading to support pre split keypool. Please use version 169900 or no version specified.</source>
-        <translation>Nie można zaktualizować portfela rozdzielnego bez HD, bez aktualizacji obsługi podzielonej bazy kluczy. Użyj wersji 169900 lub jej nie określaj.</translation>
-    </message>
-    <message>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
         <translation>Niewłaściwa ilość dla -maxtxfee=&lt;ilość&gt;: '%s' (musi wynosić przynajmniej minimalną wielkość %s aby zapobiec utknięciu transakcji)</translation>
     </message>
@@ -3863,24 +3787,12 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation>Zbyt niska kwota transakcji do wysłania po odjęciu opłaty</translation>
     </message>
     <message>
-        <source>This error could occur if this wallet was not shutdown cleanly and was last loaded using a build with a newer version of Berkeley DB. If so, please use the software that last loaded this wallet</source>
-        <translation>Ten błąd mógł wystąpić jeżeli portfel nie został poprawnie zamknięty oraz był ostatnio załadowany przy użyciu buildu z nowszą wersją Berkley DB. Jeżeli tak, proszę użyć oprogramowania które ostatnio załadowało ten portfel</translation>
-    </message>
-    <message>
-        <source>This is the maximum transaction fee you pay (in addition to the normal fee) to prioritize partial spend avoidance over regular coin selection.</source>
-        <translation>Jest to maksymalna opłata transakcyjna, którą płacisz (oprócz normalnej opłaty) za priorytetowe traktowanie unikania częściowych wydatków w stosunku do regularnego wyboru monet.</translation>
-    </message>
-    <message>
         <source>You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain</source>
         <translation>Musisz przebudować bazę używając parametru -reindex aby wrócić do trybu pełnego. To spowoduje ponowne pobranie całego łańcucha bloków</translation>
     </message>
     <message>
         <source>A fatal internal error occurred, see debug.log for details</source>
         <translation>Błąd: Wystąpił fatalny błąd wewnętrzny, sprawdź szczegóły w debug.log</translation>
-    </message>
-    <message>
-        <source>Cannot set -peerblockfilters without -blockfilterindex.</source>
-        <translation>Nie można ustawić -peerblockfilters bez -blockfilterindex.</translation>
     </message>
     <message>
         <source>Disk space is too low!</source>
@@ -3903,10 +3815,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
         <translation>Błąd: Pula kluczy jest pusta, odwołaj się do puli kluczy.</translation>
     </message>
     <message>
-        <source>Fee rate (%s) is lower than the minimum fee rate setting (%s)</source>
-        <translation>Wartość opłaty (%s) jest mniejsza niż wartość minimalna w ustawieniach (%s)</translation>
-    </message>
-    <message>
         <source>Invalid -onion address or hostname: '%s'</source>
         <translation>Niewłaściwy adres -onion lub nazwa hosta: '%s'</translation>
     </message>
@@ -3925,10 +3833,6 @@ Przejdź do Plik &gt; Otwórz Portfel aby wgrać portfel.
     <message>
         <source>Need to specify a port with -whitebind: '%s'</source>
         <translation>Musisz określić port z -whitebind: '%s'</translation>
-    </message>
-    <message>
-        <source>No proxy server specified. Use -proxy=&lt;ip&gt; or -proxy=&lt;ip:port&gt;.</source>
-        <translation>Żaden serwer proxy nie jest ustawiony. Użyj -proxy=&lt;ip&gt; lub -proxy=&lt;ip:port&gt;.</translation>
     </message>
     <message>
         <source>Prune mode is incompatible with -blockfilterindex.</source>

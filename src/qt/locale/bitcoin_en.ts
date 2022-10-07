@@ -838,7 +838,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../bitcoin.cpp" line="+419"/>
+        <location filename="../bitcoin.cpp" line="+418"/>
         <source>A fatal error occurred. %1 can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1059,17 +1059,17 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+28"/>
         <source>Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="+13"/>
         <source>Wallet Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1079,12 +1079,12 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>Advanced Options</source>
+        <location line="+19"/>
+        <source>Advanced options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+16"/>
         <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1094,7 +1094,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+13"/>
         <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1104,7 +1104,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+13"/>
         <source>Use descriptors for scriptPubKey management</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1907,7 +1907,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../overviewpage.cpp" line="+191"/>
+        <location filename="../overviewpage.cpp" line="+166"/>
         <source>Privacy mode activated for the Overview tab. To unmask the values, uncheck Settings-&gt;Mask values.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2280,7 +2280,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../bitcoin.cpp" line="+112"/>
+        <location filename="../bitcoin.cpp" line="+105"/>
         <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3867,12 +3867,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
         <location line="+12"/>
         <location line="+54"/>
         <location line="+30"/>
-        <location line="+60"/>
+        <location line="+68"/>
         <source>Credit</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location line="-154"/>
+        <location line="-162"/>
         <source>matures in %n more block(s)</source>
         <translation>
             <numerusform>matures in %n more block</numerusform>
@@ -3887,12 +3887,12 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of &quot;100 satos
     <message>
         <location line="+60"/>
         <location line="+26"/>
-        <location line="+63"/>
+        <location line="+71"/>
         <source>Debit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-79"/>
+        <location line="-87"/>
         <source>Total debit</source>
         <translation type="unfinished"></translation>
     </message>
