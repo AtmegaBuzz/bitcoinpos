@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2021-2023 The BitcoinPoS Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -183,15 +184,16 @@ public:
                 // PoS start
                 {301448, uint256S("0x12516eaba97bd70fc5d4d16e5dd4e5909d3a8a32268f5819552dc091c22f39bc")},
                 {301855, uint256S("0xd62e6ec3978064143128dac95823a6133e36b611cb001322ae6eb085a2bd5175")},
-                {350600, uint256S("0x5b7fb01b46085a99f126fa3703f9876cfe48b66c1f903191494bb5025248a6d9")},       
+                {350600, uint256S("0x5b7fb01b46085a99f126fa3703f9876cfe48b66c1f903191494bb5025248a6d9")},
+                {362560, uint256S("0xa31ba08b859fdc37e8d826ff6618c847b9315a2b21004315910ecd65e52fbd03")},
             }
         };
 
         chainTxData = ChainTxData{
             // Data from RPC: getchaintxstats
-            /* nTime    */ 1665173456,
-            /* nTxCount */ 39118296,
-            /* dTxRate  */ 0.003349675702135471,
+            /* nTime    */ 1672585984,
+            /* nTxCount */ 39143028,
+            /* dTxRate  */ 0.003515254433120089,
         };
     }
 };
