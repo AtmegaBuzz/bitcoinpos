@@ -1,0 +1,10 @@
+./test.com -algo scrypt -bits 1e0ffff0 -coins 5000000000 -nonce 2084524480 -timestamp 1691912226 -pubkey 040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9 -psz "ISRO 05/Aug/2023 The Chandrayaan-3 mission achieved a crucial milestone with the successful completion of the Lunar Orbit Insertion (LOI)" 
+Ctrl Hash:      0x00000f79333494dcdf34d613da9884613f0eb81daff5a041225ae8b9ff5e55dd
+Target:         0x00000ffff0000000000000000000000000000000000000000000000000000000
+Blk Hash:       0x5397b4b4547c1b508ae6b5e44067743b174a8c62612a75139ee53dd50798dea3
+Mkl Hash:       0x8523e961524ffe8e1b53c7aca5cc5fc5ffa2af99a3e46e6d82667e3ca90d7042
+Nonce:          2084673136
+Timestamp:      1691912226
+Pubkey:         040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9
+Coins:          5000000000
+Psz:            'ISRO 05/Aug/2023 The Chandrayaan-3 mission achieved a crucial milestone with the successful completion of the Lunar Orbit Insertion (LOI)'
